@@ -1,0 +1,62 @@
+<div class="container">
+    <div class="card">
+        <div class="d-flex justify-content-between p-3">
+            <div class="image">
+                <img src="" alt="">
+            </div>
+            <div class="quiz-header">
+                <h4>Angular Quiz!</h4>
+                <span>Welcome {{name}}</span>
+            </div>
+        </div>
+        <ng-container>
+            <div class="d-flex justify-content-around py-3">
+                <div class="score">
+                    <h5>{{points}} pointes</h5>
+                </div>
+                <div class="question-remain">
+                    <span>Question {{currentQuestion + 1}} of {{questionList.length}}</span>
+                </div>
+                <div class="timer">
+                    {{counter}} sec <span>
+                        <i class="fa fa-clock-o"></i>
+                    </span>
+                </div>
+            </div>
+            <div class="progress mb-3">
+                <div class="progress-bar progress-bar-striped bg-success" role="progressbar" [ngStyle]="{'width':progress+'%'}"
+                    aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+            <div class="question">
+                <div class="card">
+                    <h3>{{questionList[currentQuestion]?.questionText}}</h3>
+                </div>
+            
+            </div>
+            <div class="options">
+                <ol *ngFor="let option of questionList[currentQuestion]?.options">
+                    <li (click)="answer(currentQuestion+1, option)">
+                        <div appChangeBg [isCorrect]="option.correct" class="card">
+                            {{option.text}}
+                        </div>
+                    </li>
+            
+                </ol>
+            </div>
+            <div class="d-flex justify-content-between">
+                <button [disabled]="currentQuestion == 0" class="btn"><i class="fa text-primary fa-chevron-left fa-3x"
+                        aria-hidden="true" (click)=" previousQuestion()"></i></button>
+                <button (click)="resetQuiz()" class="btn"><i class="fa text-primary fa-refresh fa-3x" aria-hidden="true"></i>
+                </button>
+                <button [disabled]="currentQuestion >= questionList.length - 1" class="btn"><i
+                        class="fa text-primary fa-chevron-right fa-3x" aria-hidden="true" (click)="nextQuestion()"></i></button>
+            </div>
+        </ng-container>
+        <ng-container>
+            <div class="row d-flex justify-content-between">
+                
+            </div>
+        </ng-container>
+    </div>
+
+</div>
